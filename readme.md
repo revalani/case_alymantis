@@ -11,7 +11,7 @@ Afim de cotinuar a amordagem medalhão, criei um script de carga para o modelo d
 
 
 
-## Motivos para uso banco de dados Google BigQuery:
+## Escolha do banco de dados Google BigQuery:
     - Banco para propositos analiticos OLAP
         - Banco colunar
     - Indicado para data warehouse 
