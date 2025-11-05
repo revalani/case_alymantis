@@ -1,6 +1,10 @@
 -- ITEM 2 - VENDAS POR CATEGORIA
 -- Query para obter o total de vendas, quantidade vendida e preço médio por categoria de produto 
 
+-- logica:
+-- agrupa categoria
+-- aplica métricas de soma e média
+
 SELECT
   dp.category,
   ROUND(SUM(fs.total_revenue), 2) AS total_revenue,

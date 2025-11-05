@@ -24,7 +24,7 @@ Para fins de demonstração, descrevi o schema em formato normalizado (camada **
 
 Os scripts devem ser executados no **Google BigQuery**.
 
-#### Diagrama do Schema inicial proposto:
+#### Diagrama do Schema transacional inicial proposto:
 ```mermaid
 erDiagram
     %% ---- Legenda ----
@@ -59,7 +59,7 @@ erDiagram
     products  ||--o{ orders : "contém"
 ```
 
-#### Diagrama do Schema Final proposto:
+#### Diagrama do Schema analitico Final proposto:
 ```mermaid
 erDiagram
     %% ---- Legenda ----
@@ -142,8 +142,6 @@ Após a criação das camadas Bronze e Gold, as consultas analíticas (itens 1 a
       * `querys/5 - Produto com maior crescimento.sql`
       * `querys/6 - Clientes inativos.sql`
 
-
-
 #### Principais Decisões, Trade-offs e Limitações
 
   * **Decisão (Arquitetura):** Adotar a modelagem dimensional (Star Schema) na camada Gold.
@@ -154,7 +152,7 @@ Após a criação das camadas Bronze e Gold, as consultas analíticas (itens 1 a
       * **Impacto:** A distribuição de vendas, tendencias não refletemrealidade, o que limita da análise.
 
   * **Decisão (Query 5 - Crescimento):** A métrica de crescimento escolhida foi o maior **crescimento absoluto** na quantidade vendida comparando um mês com o mês anterior (`LAG`).
-      * **Limitação:** Esta métrica favorece produtos com alto volume de vendas (um aumento de 1000 para 1100 unidades é maior que um de 10 para 50). Uma métrica de crescimento *percentual* (`growth_pct`) poderia ser usada, mas é volátil para produtos com baixo volume (ex: 1 para 10 = 900% de crescimento). A consulta calcula ambos, mas ordena pelo absoluto.
+      * **Limitação:** Esta medida favorece produtos com alto volume de vendas (um aumento de 1000 para 1100 unidades é maior que um de 10 para 50). Uma métrica de crescimento percentual é outra abordagem, mas é volátil para produtos com baixo volume. Outra aborgadem seria comprar o produto com benchmark da sua categoria.
 
 ## 4. Instruções para Abrir o Dashboard
 
@@ -162,7 +160,7 @@ O dashboard foi desenvolvido no Looker Studio e está disponível publicamente p
 
 * Link de Acesso: [https://lookerstudio.google.com/s/sTh2xAmhmyE](https://lookerstudio.google.com/s/sTh2xAmhmyE)
 
-O dashboard se conecta diretamente ao *dataset* Gold no BigQuery e utiliza os requisitos mínimos solicitados no teste (KPIs, gráficos de barra, linha, pizza e filtros interativos).
+O dashboard se conecta diretamente ao dataset Gold no BigQuery e utiliza os requisitos mínimos solicitados no teste (KPIs, gráficos de barra, linha, pizza e filtros interativos).
 
 ### Usabilidade & Narrativa:
 O dashboard demonstra os resultados comerciais da empresa, exibindo R$ 912 milhões em receita. O ticket médio de R$ 9.100 é um destaque claro para o negócio, indicando itens de alto custo. Analisando a série temporal, o faturamento mensal tende à estabilidade, mesmo com flutuações, sendo interessante para o planejamento de estoque e fluxo de caixa.

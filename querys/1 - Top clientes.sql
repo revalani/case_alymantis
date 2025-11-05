@@ -2,6 +2,10 @@
 -- Query para obter os 10 principais clientes com base no total gasto
 -- Inclui o total gasto, número de pedidos e ticket médio
 
+-- logica:
+-- agrupa cliente
+-- aplica métrica de consumo e força saida de somente 10 registros
+
 SELECT
   dc.customer_id,
   dc.name,

@@ -1,6 +1,9 @@
 -- ITEM 3: Média de ticket por cidade
 --Query para obter para calcular a média de ticket (total de receita por pedido) para cada cidade dos clientes.
 
+-- logica:
+-- agrupo cidades
+-- aplica calculo de receita total, pedidos total e ticket médio
 
 SELECT
   COALESCE(dc.city, 'Cidade Não Especificada') AS city,

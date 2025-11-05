@@ -1,6 +1,9 @@
 -- ITEM 6: Clientes inativos
 -- Query para identificar clientes que não fizeram pedidos nos últimos 3 meses.
 
+-- lógica:
+-- varre a tabela gold_DimCustomer para identificar clientes inativos, last_order_date ñão aconteceu nos últimos 3 meses ou é nulo.
+  
 SELECT
   customer_id,
   name,

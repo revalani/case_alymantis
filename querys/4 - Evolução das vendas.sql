@@ -1,6 +1,10 @@
 -- ITEM 4: Evolução das vendas
 -- Query para obter a evolução das vendas mensais (total de receita e número de pedidos)
 
+-- logica:
+-- calcula um período dinâmico (DATAS CTE) para os últimos 12 meses
+-- agrupa a receita total e a contagem de pedidos únicos por mÊs
+
 WITH DATAS AS (
   SELECT
     DATE_SUB(
