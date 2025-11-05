@@ -101,6 +101,13 @@ Após a criação das camadas Bronze e Gold, as consultas analíticas (itens 1 a
 
 O dashboard foi desenvolvido no Looker Studio e está disponível publicamente para visualização.
 
-  * **Link de Acesso:** [https://lookerstudio.google.com/s/sUM4b5EFcJ4](https://lookerstudio.google.com/s/sUM4b5EFcJ4)
+  * **Link de Acesso:** [https://lookerstudio.google.com/s/sTh2xAmhmyE](https://lookerstudio.google.com/s/sTh2xAmhmyE)
 
 O dashboard se conecta diretamente ao *dataset* Gold no BigQuery e utiliza os requisitos mínimos solicitados no teste (KPIs, gráficos de barra, linha, pizza e filtros interativos).
+
+### Usabilidade & narrativa:
+O dashboard demonstra os resultados comerciais da empresa, exibindo R$ 912 milhões em receita. O ticket médio de R$ 9.100 é um destaque claro para o negócio, indicando itens de alto custo. Analisando a série temporal, o faturamento mensal tende à estabilidade, mesmo com flutuações, sendo interessante para o planejamento de estoque e fluxo de caixa.
+
+Comparando o perfil de faturamento entre categorias, é notável a diferença de receita entre Eletrônicos e Alimentos, com diferenças próximas a 70 vezes. O mesmo ocorre com os tickets médios (Eletrônicos com R$ 28.000 e Alimentos com R$ 404,81), sugerindo marketing e perfis de clientes distintos.
+
+Dois destaques: a categoria 'Eletrônicos' compreende 60% de toda a receita e a forte presença nas cidades de São Paulo (40,5%) e Rio de Janeiro (25,3%). Esses destaques também representam pontos de atenção quanto à concentração de categoria e cidades, sendo saudável uma maior variação geográfica e de categorias. 
