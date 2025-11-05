@@ -10,7 +10,7 @@ Este repositório contém a solução para o teste técnico de Analista de Dados
 
 ## 2. Motivação e Arquitetura
 
-Para fins de demonstração, descrevi o schema em formato normalizado (camada **Bronze**) e criei uma modelagem dimensional (camada **Gold**) para fins analíticos. Esta abordagem aplica o conceito de arquitetura medalhão, criando uma cópia do banco de origem (Bronze) e aplicando tratamentos e cruzamentos de dados em camadas (Gold) até o cliente analítico final (Dashboards, analistas, etc.).
+Para fins de demonstração, descrevi o schema em formato normalizado (camada Bronze) e criei uma modelagem dimensional (camada Gold) para fins analíticos. Esta abordagem aplica o conceito de arquitetura medalhão, criando uma cópia do banco de origem e aplicando tratamentos e cruzamentos de dados em camadas até o cliente analítico final (Dashboards, analistas, etc.).
 
 ### Motivos para uso do Google BigQuery:
 
@@ -124,7 +124,7 @@ Dessa forma será criado o schema sugerido para o case e populado dados nas tabe
 
 ### Passo 2: ETL para Modelo Dimensional (Camada Gold)
 
-Execute este script para criar o *Data Mart* (modelo dimensional Star Schema) e carregar os dados tratados da camada Bronze.
+Execute este script para criar o Data Mart (modelo dimensional estrela) e carregar os dados tratados da camada bronze.
 
  * **Script:** `querys/bd - gold.sql`
 
@@ -132,7 +132,7 @@ Concluindo o cenário de banco de dadso que será analisado nesse caso de estudo
 
 ### Passo 3: Consultas Analíticas (Respostas do Teste)
 
-Após a criação das camadas Bronze e Gold, as consultas analíticas (itens 1 a 6) podem ser executadas. Todas elas leem dados da schema Gold.
+Após a criação das camadas bronze e gold, as consultas analíticas (itens 1 a 6) podem ser executadas. Todas elas leem dados da camada gold.
 
   * **Scripts:**
       * `querys/1 - Top clientes.sql`
@@ -144,15 +144,15 @@ Após a criação das camadas Bronze e Gold, as consultas analíticas (itens 1 a
 
 #### Principais Decisões, Trade-offs e Limitações
 
-  * **Decisão (Arquitetura):** Adotar a modelagem dimensional (Star Schema) na camada Gold.
-    * **Trade-off:** Esta abordagem gera redundância de dados (comparada à 3FN da camada Bronze), mas oferece performance copia da origem e simplicidade superiores para consultas analíticas.
+  * **Decisão (Arquitetura):** Adotar a modelagem dimensional na camada gold.
+    * **Trade-off:** Esta abordagem gera redundância de dados (comparada à 3FN da camada bronze), mas oferece performance superiores para consultas analíticas.
   * **Decisão (Carga de Dados):** O script `bd - gold.sql` realiza uma carga completa (full-load).
       * **Limitação:** Para um ambiente de produção, o ideal seria implementar cargas incrementais, especialmente para a `FactSales`, carregando somente pedidos novos.
   * **Limitação (Simulação de Dados):** Os dados gerados em `bd - bronze.sql` são aleatórios.
       * **Impacto:** A distribuição de vendas, tendencias não refletemrealidade, o que limita da análise.
 
   * **Decisão (Query 5 - Crescimento):** A métrica de crescimento escolhida foi o maior **crescimento absoluto** na quantidade vendida comparando um mês com o mês anterior (`LAG`).
-      * **Limitação:** Esta medida favorece produtos com alto volume de vendas (um aumento de 1000 para 1100 unidades é maior que um de 10 para 50). Uma métrica de crescimento percentual é outra abordagem, mas é volátil para produtos com baixo volume. Outra aborgadem seria comprar o produto com benchmark da sua categoria.
+      * **Limitação:** Esse calculo favorece produtos com alto volume de vendas. Outro método é calulo usando crescimento percentual, mas é volátil para produtos com baixo volume. Outra aborgadem seria comprar o produto com benchmark da sua categoria.
 
 ## 4. Instruções para Abrir o Dashboard
 
@@ -160,7 +160,7 @@ O dashboard foi desenvolvido no Looker Studio e está disponível publicamente p
 
 * Link de Acesso: [https://lookerstudio.google.com/s/sTh2xAmhmyE](https://lookerstudio.google.com/s/sTh2xAmhmyE)
 
-O dashboard se conecta diretamente ao dataset Gold no BigQuery e utiliza os requisitos mínimos solicitados no teste (KPIs, gráficos de barra, linha, pizza e filtros interativos).
+O dashboard se conecta diretamente ao dataset gold no BigQuery e utiliza os requisitos mínimos solicitados no teste (KPIs, gráficos de barra, linha, pizza e filtros interativos).
 
 ### Usabilidade & Narrativa:
 O dashboard demonstra os resultados comerciais da empresa, exibindo R$ 912 milhões em receita. O ticket médio de R$ 9.100 é um destaque claro para o negócio, indicando itens de alto custo. Analisando a série temporal, o faturamento mensal tende à estabilidade, mesmo com flutuações, sendo interessante para o planejamento de estoque e fluxo de caixa.
